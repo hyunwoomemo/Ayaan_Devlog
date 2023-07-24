@@ -1,5 +1,5 @@
 
-import './globals.css'
+import './globals.scss'
 import Header from './components/Header';
 import StyledComponentsRegistry from './lib/registry';
 
