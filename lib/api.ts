@@ -123,9 +123,9 @@ export async function getAllPosts() {
 }
 
 export async function getAllTIL() {
-  const categories = fs.readdirSync("_TIL");
+  const dates = fs.readdirSync("_TIL");
   const posts = await Promise.all(
-    categories.map(async (category) => {
+    dates.map(async (category) => {
       const categoryPosts = await Promise.all(
         fs.readdirSync(join("_TIL", category)).map((id) => getTILById(category, id))
       )
@@ -136,7 +136,7 @@ export async function getAllTIL() {
 
   const allPosts = posts.flat();
 
-  return {category: categories, post: allPosts.sort((post1, post2) => (post1.date > post2.date ? -1 : 1))};
+  return {postDate: dates, post: allPosts.sort((post1, post2) => (post1.date > post2.date ? -1 : 1))};
 }
 
 interface objectProps {
