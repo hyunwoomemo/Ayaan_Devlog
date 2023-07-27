@@ -21,6 +21,7 @@ const Base = styled.article`
   flex-direction: column;
   display: flex;
   gap: 1rem;
+  padding-bottom: 5rem;
 
 ul {
   margin: 0;

@@ -125,6 +125,36 @@ span[data-chars-id='c'] {
     background-color: #6b21a880;
     color: rgb(233 213 255/1)!important;
 }
+
+> p {
+  > code {
+    padding: 5px ;
+    background-color: tomato;
+    color: #fff;
+    border-radius: 5px;
+  }
+
+  > img {
+    max-width: 80%;
+  }
+
+}
+p {
+  a {
+  border-bottom: 2px dashed gray;
+}
+}
+
+blockquote {
+  margin: 0;
+  border-left: 3px solid gray;
+
+  > p {
+    padding-left: 1rem;
+  }
+}
+
+
 `
 
 export default PostDetail
