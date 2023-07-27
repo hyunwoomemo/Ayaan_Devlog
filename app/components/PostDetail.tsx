@@ -135,7 +135,8 @@ span[data-chars-id='c'] {
   }
 
   > img {
-    max-width: 80%;
+    max-width: 100%;
+    width: 100%;
   }
 
 }
