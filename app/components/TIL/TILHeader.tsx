@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import React, { ChangeEvent, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 interface Props {
