@@ -28,7 +28,6 @@ pre {
   padding: 1rem 0;
   overflow: auto;
   margin: 0;
-  max-height: 300px;
 
   > code {
     display: flex;

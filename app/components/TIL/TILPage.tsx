@@ -26,8 +26,6 @@ const Base = styled.div`
     padding: 0;
 
     > div {
-      display: flex;
-      justify-content: space-between;
 
       @media (max-width: 768px) {
         flex-direction: column;
@@ -37,27 +35,9 @@ const Base = styled.div`
         display: flex;
         flex-direction: column;
         gap: 2rem;
-        max-width: 70%;
       }
 
       > li {
-        min-width: 100px;
-        position: relative;
-        overflow: hidden;
-        white-space: nowrap;
-        @media (min-width:768px) {
-          &:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 2px;
-            height: 300%;
-            background-color: #000000;
-            z-index: -2;
-          }
 
           &:after {
             content: '';
