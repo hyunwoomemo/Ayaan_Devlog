@@ -1,7 +1,7 @@
 ---
 title: vue 로컬 환경에서 cors 해결하기
 date: 2023-07-27
-category: Vue
+category: vue
 summary: 'devServer / proxy'
 ---
 
