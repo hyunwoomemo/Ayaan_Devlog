@@ -59,7 +59,6 @@ const Header = () => {
   return (
     <Base showHeader={showHeader}>
       <Link href="/">Ayaan</Link>
-        <Link href="/blog">BLOG</Link>
         <Link href="/TIL">TIL</Link>
       <Link href="/about">ABOUT</Link>
       <span><button onClick={() => setIsDark(!isDark)}>click</button></span>
@@ -75,7 +74,7 @@ const Base = styled.header<{showHeader: boolean}>`
   justify-content: center;
   background-color: #ffffff;
   padding: 1rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid gray;
   position: sticky;
   top: 0;
   z-index: 99;

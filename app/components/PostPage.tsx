@@ -27,7 +27,7 @@ ul {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 2rem;
+  gap: 5rem;
   flex-direction: column;
 }
 `

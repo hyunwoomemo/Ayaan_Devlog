@@ -126,7 +126,21 @@ span[data-chars-id='c'] {
     color: rgb(233 213 255/1)!important;
 }
 
+p > span > code {
+  padding: 5px;
+  box-sizing: border-box;
+}
 
+> p {
+  line-height: 30px;
+
+  code {
+    background-color: tomato;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+  }
+}
 `
 
 export default TILItem
