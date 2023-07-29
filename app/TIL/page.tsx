@@ -1,9 +1,6 @@
 import { getAllTIL } from "@/lib/api";
 import TILPage from '../components/TIL/TILPage';
-import TILItem from '../components/TIL/TILItem';
-import TILWrapper from '../components/TIL/TILWrapper';
 import TILHeader from '../components/TIL/TILHeader';
-import { useRouter } from 'next/router';
 import TILList from '../components/TIL/TILList';
 
 // Generate the post, note that this is a "react server component"! it is

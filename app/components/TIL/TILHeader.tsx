@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React, { ChangeEvent, useState } from 'react'
+import React from 'react'
 import { styled } from 'styled-components'
 
 interface Props {
@@ -8,7 +8,6 @@ interface Props {
 }
 
 const TILHeader = ({ category }: Props) => {
-  const [selectCategory, setSelectCategory] = useState('');
   return (
     <Base>
       <ul>
