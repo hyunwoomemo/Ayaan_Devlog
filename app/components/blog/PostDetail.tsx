@@ -159,6 +159,18 @@ ul {
   }
 }
 
+ol {
+  padding: 0;
+  > li {
+    list-style: decimal;
+    margin-left: 1rem;
+
+    &:not(:first-of-type) {
+      margin-top: 5px;
+    }
+  }
+}
+
 h2 {
   border-bottom: 3px solid gray;
   padding: 1rem 0;
