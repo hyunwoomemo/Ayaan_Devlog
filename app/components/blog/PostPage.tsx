@@ -23,7 +23,7 @@ const Base = styled.article`
   gap: 1rem;
   padding-bottom: 5rem;
 
-ul {
+> ul {
   margin: 0;
   padding: 0;
   display: flex;

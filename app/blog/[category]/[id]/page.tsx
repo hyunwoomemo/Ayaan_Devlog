@@ -1,16 +1,17 @@
-import PostDetail from '@/app/components/PostDetail';
-import PostPage from '@/app/components/PostPage';
+import PostDetail from '@/app/components/blog/PostDetail';
+import PostPage from '@/app/components/blog/PostPage';
 import { getPostById, getAllPosts } from "@/lib/api";
 
 // Generate the post, note that this is a "react server component"! it is
 // allowed to be async
 export default async function Post({ params: { id, category } }: { params: { id: string, category:string } }) {
-  const { html, title, date, summary } = await getPostById(category,id);
+  const { html, title, date, summary, image } = await getPostById(category,id);
 
   return (
     <PostPage>
       <h1>{title}</h1>
       <h4>{date}</h4>
+      <img src={image} alt="" />
       <PostDetail html={html} /> 
     </PostPage>
   );

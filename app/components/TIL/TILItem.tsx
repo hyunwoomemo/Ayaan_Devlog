@@ -9,7 +9,10 @@ interface Props {
 const TILItem = ({ html }: Props) => {
 
   return (
-    <Base dangerouslySetInnerHTML={{__html: html}}></Base>
+    <div>
+    <Base dangerouslySetInnerHTML={{ __html: html }}>
+    </Base>
+    </div>
   )
 }
 

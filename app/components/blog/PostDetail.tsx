@@ -127,13 +127,6 @@ span[data-chars-id='c'] {
 }
 
 > p {
-  > code {
-    padding: 5px ;
-    background-color: tomato;
-    color: #fff;
-    border-radius: 5px;
-  }
-
   > img {
     max-width: 100%;
     width: 100%;
@@ -155,7 +148,31 @@ blockquote {
   }
 }
 
+ul {
+  > li {
+    list-style: circle;
+    margin-left: 1rem;
 
+    &:not(:first-of-type) {
+      margin-top: 5px;
+    }
+  }
+}
+
+h2 {
+  border-bottom: 3px solid gray;
+  padding: 1rem 0;
+}
+
+p, ul {
+  code {
+    padding: 3px ;
+    margin: 0 2px;
+    background-color: #4b4b4b;
+    color: #fff;
+    border-radius: 5px;
+  }
+}
 `
 
 export default PostDetail

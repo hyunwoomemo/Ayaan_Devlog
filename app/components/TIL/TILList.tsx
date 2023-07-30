@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import TILHeader from './TILHeader'
 import TILWrapper from './TILWrapper'
@@ -13,14 +13,35 @@ interface Props {
   children: React.ReactNode
 }
 
+interface PostsProps {
+  date: string,
+  categroy: string,
+  id: string,
+  html: string
+}
+
 const TILList = ({ postDate, post }: Props) => {
   const params = useSearchParams();
 
+  const [posts, setPosts] = useState<PostsProps[]>(post);
+  const [date, setDate] = useState<string[]>(postDate);
+  
+
+  useEffect(() => {
+    if (params.get('category')) {
+      const filterPost = post.filter((v) => v.category === params.get('category'));
+      setPosts(filterPost)
+      const filterDate = filterPost.map((v) => v.date);
+      setDate(filterDate);
+    }
+  }, [params, post])
+
+
+  console.log(posts)
+
   return (
     <Base>
-      {postDate.reverse().map((v) => {
-          const filterPost = params.get('category')  ? post.filter((p) => p.date === v && p.category === params.get('category')) : post.filter((p) => p.date === v);
-          const categories = post.map((item) => item.category);
+      {/* {date.reverse().map((v, i) => {
           const postData = filterPost.map((p) => {
             const { id, html } = p;
             return (
@@ -30,13 +51,21 @@ const TILList = ({ postDate, post }: Props) => {
             )
           })
           return (
-            <div key={v}>
+            <div key={v+i}>
               <li>{v}</li>
               <div>
               {postData}
               </div>
             </div>
           )
+      })} */}
+      {posts.map((item, i) => {
+        return (
+          <TILWrapper key={item.date + i}>
+            <span>{item.date}</span>
+            <TILItem html={item.html} />
+          </TILWrapper>
+        )
       })}
     </Base>
   )

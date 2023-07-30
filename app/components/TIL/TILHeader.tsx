@@ -11,7 +11,7 @@ const TILHeader = ({ category }: Props) => {
   return (
     <Base>
       <ul>
-        {category?.map((v, i) => {
+        {category?.filter((item, i, arr) => arr.indexOf(item) === i )?.map((v, i) => {
           return (
             <Link href={`/TIL?category=${v}`}  key={i}>{v}</Link>
           )

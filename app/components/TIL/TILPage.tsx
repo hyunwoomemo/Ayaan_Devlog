@@ -52,7 +52,6 @@ const Base = styled.div`
         }
       }
     }
-  }
 `
 
 export default TILPage

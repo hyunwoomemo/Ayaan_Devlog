@@ -80,6 +80,7 @@ export async function getPostById(category: string, id: string) {
     title: data.title,
     category: data.category,
     summary: data.summary,
+    image: data.image,
     id: realId,
     date: `${data.date?.toISOString().slice(0, 10)}`,
     html: html.value.toString(),
