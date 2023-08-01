@@ -1,6 +1,6 @@
 ---
 date: 2023-07-26
-category: vue.js
+category: Vue.js
 ---
 
 # Vue slot 키워드

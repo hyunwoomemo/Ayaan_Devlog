@@ -1,6 +1,6 @@
 ---
 date: 2023-07-24
-category: vue.js
+category: Vue.js
 ---
 
 ```javascript /formatter/#a title="vue.js element-ui" caption="table 사용할 때 property에 format 적용하기" /row/#b {4}

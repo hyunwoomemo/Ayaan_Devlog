@@ -136,12 +136,15 @@ p > span > code {
 
 > p {
   line-height: 30px;
+  }
 
+  p, ul {
   code {
-    background-color: tomato;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 3px ;
+    margin: 0 2px;
+    background-color: #4b4b4b;
     color: #fff;
+    border-radius: 5px;
   }
 }
 `
