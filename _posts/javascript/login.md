@@ -146,3 +146,82 @@ function authMiddleware(req, res, next) {
 
 이전의 토큰을 사용해도 인증이 가능하기 때문에 RefreshToken 사용 방식을 이용하여 이러한 문제점을 보완한다.
 
+```javascript {6, 20-21, 23-24, 26-30} /expiresIn/#a /cookie/#b 
+const express = require('express');
+const jwt = require('jsonwebtoken')
+
+const app = express();
+const secretText = 'superSecret';
+const refreshSecretText = 'refreshSecret'
+
+let refreshTokens = []
+
+app.use(express.json());
+
+app.post('/login', (req, res) => {
+  const username = req.body.username;
+  const user = { name: username };
+
+  // jwt를 이용해서 토큰 생성하기 payload + secretText
+  // 유효기간 추가
+  const accessToken = jwt.sign(user, secretText, { expiresIn: '30s' });
+  
+  // jwt를 이용해서 refreshToken도 생성
+  const refreshToken = jwt.sign(user, refreshSecretText, { expiresIn: '1d' });
+
+  // 보통 refreshToken은 데이터베이스에 저장한다고 한다.
+  refreshTokens.push(refreshToken)
+
+  // refreshToken을 쿠키에 넣어주기
+  res.cookie('jwt', refreshToken, {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000
+  })
+
+  res.json({accessToken})
+})
+
+app.get('/posts', authMiddleware, (req, res) => {
+  res.json(posts)
+})
+```
+
+위 코드처럼 설정해주고 `/login` 하게되면 응답으로 accessToken을 받게되고 refreshToken은 쿠키에 저장될 것이다.
+
+그 다음으로, `/post' get 요청을 보내면 정상적으로 posts 객체를 받을 것이다.
+
+하지만 30초 뒤에 다시 '/post' 요청을 보내면 Forbidden 이라는 에러가 발생한다.
+
+왜냐하면, accessToken을 생성할 때, jwt.sign 메소드의 옵션으로 `expiresIn`을 설정해주었기 때문이다.
+`const accessToken = jwt.sign(user, secretText, { expiresIn: '30s' }){:js}`
+
+이제 refreshToken을 이용해서 accessToken을 생성해보자 !
+
+### RefreshToken으로 accessToken 생성하기
+
+```javascript {1, 3} title="npm i cookie-parser"
+const cookieParser = require('cookie-parser');
+
+app.use(cookieParser());
+
+app.get('/refresh', (req, res) => {
+  const cookies = req.cookies
+  if (!cookies?.jwt) return res.sendStatus(401); 
+
+  const refreshToken = cookies.jwt
+  // refreshToken이 데이터베이스에 있는 토큰인지 확인 (여기서는 배열을 확인)
+  if (!refreshTokens.includes(refreshToken)) {
+    return res.sendStatus(403)
+  }
+
+  // 토큰이 유효한 토큰인지 확인
+  jwt.verify(refreshToken, refreshSecretText, (err, user) => {
+    if (err) return res.sendStatus(403)
+    // accessToken을 생성
+    const accessToken = jwt.sign({ name: user.name }, secretText, { expiresIn: '30s' })
+    
+    res.json({accessToken})
+  })
+
+})
+```
