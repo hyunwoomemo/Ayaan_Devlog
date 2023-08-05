@@ -66,9 +66,83 @@ JWT의 마지막 세그먼트는 토큰이 보낸 사람에 의해 서명되었�
 
 ### JWT 사용 흐름
 
-유저 로그인 -> 토큰 생성 -> 토큰 보관
+유저 로그인 -> 토큰 생성 -> 토큰 보관 -> 요청을 보낼 때 보관하고 있던 Token을 Header에 넣어서 같이 보냄 -> 서버에서는 JWT를 이용해서 Token을 다시 생성한 후 두개를 비교
 
-비교 흐름
+## 간단한 인증 시스템 구현
 
-1. 요청을 보낼 때 보관하고 이던 Token을 Header에 넣어서 같이 보낸다.
-2. 서버에서는 JWT를 이용해서 Token을 다시 생성한 후 두개를 비교
+### jwt.sign()
+```javascript /jwt/#a {14}
+const express = require('express');
+const jwt = require('jsonwebtoken')
+
+const app = express();
+const secretText = 'superSecret';
+
+app.use(express.json());
+
+app.post('/login', (req, res) => {
+  const username = req.body.username;
+  const user = { name: username };
+
+  // jwt를 이용해서 토큰 생성하기 payload + secretText
+  const accessToken = jwt.sign(user, secretText);
+  res.json({accessToken})
+})
+
+const port = 4000;
+
+app.listen(port, () => {
+  console.log('listening' + port)
+})
+```
+
+![image](https://github.com/hyunwoomemo/Ayaan_Devlog/assets/105469077/833f2aff-9b7b-4615-a203-1c7fcfeb0abb)
+
+### get post api
+
+```javascript
+const posts = [
+  {
+  username: 'John',
+    title: 'Post 1',
+  },
+  {
+  username: 'Hyun',
+    title: 'Post 2',
+  },
+]
+
+app.get('/posts', (req, res) => {
+  res.json(posts)
+})
+```
+
+### 인증이 된 사람만 Post를 가져갈 수 있게 만들기
+
+```javascript /authMiddleware/#a
+app.get('/posts', authMiddleware, (req, res) => {
+  res.json(posts)
+})
+
+function authMiddleware(req, res, next) {
+  // request header안에 authorizatipn에 token이 있음
+  const authHeader = req.headers['authorization'];
+  // 보통 token은 'Bearer ~~~~'로 되어있기 때문에 공백을 기준으로 split 메서드를 사용. 배열의 인덱스값 1이 token을 의미
+  const token = authHeader && authHeader.split(' ')[1]
+  if (token === null) return res.sendStatus(401)
+
+  jwt.verify(token, secretText, (err, user) => {
+    console.log(err)
+    if (err) return res.sendStatus(403)
+    req.user = user
+    next()
+  })
+}
+```
+
+## RefreshToken 생성하기
+
+최초 accessToken을 발급받고나서 로그아웃하고 다시 로그인 했을 때 새로운 token을 발급 받는다.
+
+이전의 토큰을 사용해도 인증이 가능하기 때문에 RefreshToken 사용 방식을 이용하여 이러한 문제점을 보완한다.
+
