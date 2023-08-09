@@ -2,7 +2,7 @@
 title: 로그인, 인증 기능 구축 프로젝트
 date: 2023-07-30
 category: javascript
-summary: 'jwt와 passport를 이용한 인증 앱 생성하기'
+summary: 'jwt를 이용한 인증 앱 생성하기'
 image: 'https://images.unsplash.com/photo-1529539795054-3c162aab037a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
 ---
 
