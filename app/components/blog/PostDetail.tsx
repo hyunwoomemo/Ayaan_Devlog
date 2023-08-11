@@ -58,7 +58,6 @@ div[data-rehype-pretty-code-title] {
 }
 
 div[data-rehype-pretty-code-caption] {
-  background-color: #ffffff;
   padding: 5px;
   margin: 3px 0;
   position: relative;
@@ -140,11 +139,21 @@ p {
 }
 
 blockquote {
+  font-size: medium;
   margin: 0;
-  border-left: 3px solid gray;
+  background-color: #f6f6f6;
+  padding: 10px;
+  border-radius: 1rem;
 
   > p {
-    padding-left: 1rem;
+    margin: 10px;
+    &:first-of-type {
+      padding: 3px 7px;
+      background-color: #4b4b4b;
+      display: inline-block;
+      color: #fff;
+      border-radius: 5px;
+    }
   }
 }
 
@@ -172,8 +181,8 @@ ol {
 }
 
 h2 {
-  border-bottom: 3px solid gray;
-  padding: 1rem 0;
+  border-bottom: 2px solid gray;
+  padding: 4rem 0 1rem 0;
 }
 
 p, ul {
@@ -185,6 +194,7 @@ p, ul {
     border-radius: 5px;
   }
 }
+
 `
 
 export default PostDetail
